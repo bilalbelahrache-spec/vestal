@@ -1,0 +1,26 @@
+{
+  "name": "web",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build && npm run prerender",
+    "build:dev": "tsc -b && vite build --mode development && npm run prerender",
+    "prerender": "vite-node scripts/prerender.tsx",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "preact": "^10.29.3",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.5",
+    "@types/node": "^24.13.2",
+    "@types/qrcode": "^1.5.6",
+    "preact-render-to-string": "^6.7.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.1.1",
+    "vite-node": "^6.0.0"
+  }
+}

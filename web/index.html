@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-site-verification" content="TH2Xg1CvoTYDfhzAqgUHokM1jfLF1Oad1hkAXxbQkj4" />
+    <title>Vestal — backups that prove they can restore</title>
+    <meta
+      name="description"
+      content="A dead-man's switch for real backup verification. Agents for restic, Borg, Kopia, and Duplicati run genuine integrity checks and alert you the moment a backup stops being restorable."
+    />
+    <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fdfcfb" media="(prefers-color-scheme: light)" />
+
+    <!-- Social cards -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Vestal" />
+    <meta property="og:title" content="Vestal — backups that prove they can restore" />
+    <meta
+      property="og:description"
+      content="Your backup software says it worked. Make it prove it. Real restore verification for restic, Borg, Kopia, and Duplicati, with alerts to Discord, Slack, email, and webhooks."
+    />
+    <meta property="og:url" content="https://vestalapp.com/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Vestal — backups that prove they can restore" />
+    <meta
+      name="twitter:description"
+      content="A dead-man's switch for real backup verification. Free to start, AGPL-3.0 open-core."
+    />
+
+    <!-- Structured data: site-wide identity, safe to be static since it
+         doesn't vary per route (unlike title/description, which are set
+         per-page in web/src/lib/seo.ts). Loaded via `src`, not inline —
+         the CSP's script-src is deliberately 'self'-only with no
+         'unsafe-inline' (see src/security.ts), so an inline JSON-LD block
+         here would just get silently blocked by the browser (and by
+         Google's own CSP-enforcing renderer). A same-origin file is
+         already allowed under 'self' with no CSP change needed. -->
+    <script type="application/ld+json" src="/structured-data.json"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

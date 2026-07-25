@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /organizations
+Disallow: /reset-password
+Disallow: /verify-email
+Disallow: /admin.html
+
+Sitemap: https://vestalapp.com/sitemap.xml

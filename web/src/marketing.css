@@ -1,0 +1,1274 @@
+/* ==========================================================================
+   Marketing & content pages: landing, pricing, docs, security, about,
+   changelog, legal. App chrome/dashboard styles live in app.css.
+   ========================================================================== */
+
+/* --- Section scaffolding -------------------------------------------------- */
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: 2.75rem;
+}
+.section-head.is-center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.section-head h2 {
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+}
+/* The short gold rule under every display heading — the design's one
+   decorative signature, borrowed from the enterprise-print register. */
+.section-head h2::after,
+.page-hero h1::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 3px;
+  margin-top: 0.45em;
+  background: var(--gold);
+}
+.section-head.is-center h2::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-lead {
+  font-size: 1.02rem;
+  color: var(--text);
+  margin: 0;
+}
+
+.text-link {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+/* --- Sub-page hero --------------------------------------------------------- */
+
+.page-hero {
+  position: relative;
+  padding: 4.5rem 0 3rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-page) var(--arcs-ink);
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+.page-hero h1 {
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  max-width: 20ch;
+}
+.page-hero-lead {
+  font-size: 1.08rem;
+  max-width: 58ch;
+  color: var(--text);
+  margin-bottom: 0;
+}
+
+/* --- Terminal window -------------------------------------------------------
+   Fixed-dark in both themes: it's a screenshot, not a themed component. */
+
+.term {
+  background: var(--panel-dark);
+  border: 1px solid var(--panel-dark-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  font-size: 0.8rem;
+}
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--panel-dark-border);
+}
+.term-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3d3833;
+}
+.term-title {
+  margin-left: 0.5rem;
+  color: #8a827a;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.term-body {
+  margin: 0;
+  padding: 0.9rem 1rem 1rem;
+  font-family: var(--mono);
+  color: var(--panel-dark-text);
+  overflow-x: auto;
+  line-height: 1.7;
+}
+.term-prompt {
+  color: #d9a13a;
+  user-select: none;
+}
+.term-line.is-ok {
+  color: #86c79a;
+}
+.term-line.is-err {
+  color: #e07a6d;
+}
+.term-line.is-warn {
+  color: #d9a13a;
+}
+.term-line.is-dim {
+  color: #837c72;
+}
+
+/* --- Tool / channel marks --------------------------------------------------- */
+
+.tool-marks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.6rem;
+  align-items: center;
+  justify-content: center;
+}
+.tool-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 650;
+  font-size: 1.02rem;
+  letter-spacing: -0.01em;
+  color: var(--text-soft);
+  transition: color 0.2s;
+}
+.tool-mark:hover {
+  color: var(--text-h);
+}
+.tool-mark-glyph {
+  width: 20px;
+  height: 20px;
+  color: var(--text-soft);
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+.tool-mark:hover .tool-mark-glyph {
+  color: var(--accent);
+}
+.tool-mark-img {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+/* --- FAQ (native details) --------------------------------------------------- */
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  transition: border-color 0.2s;
+}
+.faq-item[open] {
+  border-color: var(--border-strong);
+}
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-h);
+  list-style: none;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-chevron {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--text-soft);
+  transition: transform 0.25s var(--ease);
+}
+.faq-item[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+.faq-answer {
+  padding: 0 1.15rem 1.1rem;
+  font-size: 0.94rem;
+}
+.faq-answer p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- CTA band ----------------------------------------------------------------
+   Fixed deep-pine band in both themes, textured with the cream arcs. */
+
+.cta-band {
+  position: relative;
+  background: #273f30 var(--arcs-cream);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 5.5rem 0;
+  text-align: center;
+  overflow: hidden;
+}
+.cta-band-inner {
+  position: relative;
+}
+.cta-band h2 {
+  color: #f5f3ee;
+  font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+}
+.cta-band h2::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 3px;
+  margin: 0.5em auto 0;
+  background: var(--gold);
+}
+.cta-band-sub {
+  color: #c3cfc4;
+  max-width: 52ch;
+  margin: 0 auto 1.75rem;
+}
+.cta-band-actions {
+  display: flex;
+  gap: 0.85rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+/* On the pine band, the primary button flips to cream so it stays the
+   highest-contrast element; the ghost is a thin cream outline. */
+.cta-band .btn-primary {
+  background: #f5f3ee;
+  border-color: #f5f3ee;
+  color: #161513;
+}
+.cta-band .btn-primary:hover:not(:disabled) {
+  background: #e6e2d8;
+  border-color: #e6e2d8;
+}
+.btn-ghost-dark {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 2px;
+  padding: 0.75rem 1.6rem;
+  border: 1px solid rgba(245, 243, 238, 0.45);
+  color: #f5f3ee;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+.btn-ghost-dark:hover {
+  background: rgba(245, 243, 238, 0.08);
+  border-color: rgba(245, 243, 238, 0.75);
+  text-decoration: none;
+}
+
+/* --- Pulse dot ---------------------------------------------------------------- */
+
+/* A plain, still dot — not tied to any real live data (the hero badge and
+   footer status line are both static copy), so it stays quiet rather than
+   pulsing. The dashboard mockup's alert dots below use the same keyframe
+   but earn the motion: they're depicting an actual live/failed check
+   state, not marketing furniture pretending to be one. */
+.pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+}
+
+/* --- Site footer ---------------------------------------------------------------
+   A darker pine than the CTA band it always follows, so the two dark
+   bands read as related but distinct. */
+
+.site-footer {
+  background: #1e3125;
+  color: #b9c5ba;
+  border-top: 1px solid rgba(245, 243, 238, 0.12);
+  padding: 4rem 0 2rem;
+}
+.site-footer a {
+  color: #dde3da;
+}
+.site-footer a:hover {
+  color: #d9a13a;
+  text-decoration: none;
+}
+.site-footer-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+}
+.site-footer-wordmark span {
+  color: #f5f3ee;
+}
+.site-footer .wordmark svg {
+  color: #d9a13a;
+}
+.site-footer-tagline {
+  font-size: 0.9rem;
+  max-width: 38ch;
+  margin: 1rem 0 0.75rem;
+}
+.site-footer-madewith {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin: 0;
+}
+.site-footer-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.site-footer-col h4 {
+  color: #f5f3ee;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+.site-footer-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.site-footer-col a {
+  font-size: 0.9rem;
+}
+.site-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(245, 243, 238, 0.12);
+  padding-top: 1.5rem;
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+.site-footer-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 860px) {
+  .site-footer-inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .site-footer-cols {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================== Home ========================================= */
+
+/* --- Hero --- */
+
+.hero {
+  position: relative;
+  padding: 5.5rem 0 6rem;
+  overflow: hidden;
+  background: var(--bg-page) var(--arcs-ink);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 3.5rem;
+}
+@media (max-width: 900px) {
+  .hero {
+    padding: 3.5rem 0 4.5rem;
+  }
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+  }
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-h);
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  padding: 0.3rem 0.85rem;
+  margin-bottom: 1.4rem;
+  background: var(--bg);
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 4.4vw, 3.3rem);
+  line-height: 1.12;
+  margin-bottom: 0.5em;
+}
+.hero h1::after {
+  content: "";
+  display: block;
+  width: 52px;
+  height: 3px;
+  margin-top: 0.4em;
+  background: var(--gold);
+}
+.hero-sub {
+  font-size: 1.1rem;
+  max-width: 50ch;
+  color: var(--text);
+}
+.hero-actions {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin: 1.6rem 0 1.25rem;
+}
+.hero-trust {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin: 0;
+}
+
+/* Hero visual: dashboard mock + overlapping alert card */
+
+.hero-visual {
+  position: relative;
+  padding-bottom: 3.5rem;
+}
+.mock-dash {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+.mock-dash-bar {
+  display: flex;
+  justify-content: center;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-subtle);
+}
+.mock-dash-title {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-soft);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.15rem 1.4rem;
+}
+.mock-dash-body {
+  padding: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.mock-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.7rem 0.85rem;
+  background: var(--bg);
+}
+.mock-row.is-alert {
+  border-color: color-mix(in srgb, var(--danger) 35%, var(--border));
+  background: var(--danger-bg);
+}
+.mock-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.mock-dot.is-ok {
+  background: var(--success);
+}
+.mock-dot.is-bad {
+  background: var(--danger);
+  --pulse-color: var(--danger-bg);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .mock-dot.is-bad {
+    animation: pulse-dot 1.8s ease-out infinite;
+  }
+}
+.mock-dot.is-late {
+  background: var(--warning);
+}
+.mock-name {
+  flex: 1;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-h);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mock-row .status-badge {
+  flex-shrink: 0;
+}
+
+.mock-alert-card {
+  position: absolute;
+  right: -0.5rem;
+  bottom: 0;
+  width: min(320px, 88%);
+  background: var(--panel-dark);
+  border: 1px solid var(--panel-dark-border);
+  border-radius: var(--radius-lg);
+  padding: 0.85rem 1rem;
+  box-shadow: var(--shadow-lg);
+}
+.mock-alert-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+.mock-alert-app {
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #e0705a;
+}
+.mock-alert-time {
+  font-size: 0.72rem;
+  color: #837c72;
+}
+.mock-alert-body {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--panel-dark-text);
+  line-height: 1.5;
+}
+.mock-alert-body strong {
+  color: var(--panel-dark-text-h);
+}
+
+/* --- Integrations strip --- */
+
+.integrations-strip {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-subtle);
+  padding: 2.25rem 0;
+}
+.integrations-label {
+  text-align: center;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--text-soft);
+  margin-bottom: 1.4rem;
+}
+.integrations-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+}
+.integrations-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border-strong);
+}
+@media (max-width: 700px) {
+  .integrations-divider {
+    display: none;
+  }
+}
+
+/* --- Problem band --- */
+
+.problem-band {
+  padding: 6rem 0 5rem;
+}
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+.problem-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem;
+  background: var(--bg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.problem-card:hover {
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border-strong);
+}
+/* These three cards are parallel failure modes, not a sequence — no
+   ordinal numbering (see the "How it works" steps below for where a real
+   sequence earns one). A short rule instead, echoing the same signature
+   device under display headings, just scaled down for a card context. */
+.problem-card h3 {
+  font-size: 1.05rem;
+}
+.problem-card h3::before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 3px;
+  margin-bottom: 0.7em;
+  background: var(--gold);
+}
+.problem-card p {
+  font-size: 0.92rem;
+  margin: 0;
+}
+.problem-kicker {
+  margin: 2.5rem auto 0;
+  max-width: 62ch;
+  text-align: center;
+  font-size: 1.02rem;
+  color: var(--text-h);
+}
+@media (max-width: 860px) {
+  .problem-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- How it works --- */
+
+.how-it-works {
+  padding: 5rem 0 6rem;
+  scroll-margin-top: 80px;
+  border-top: 1px solid var(--border);
+}
+.hiw-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+.hiw-step {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+.hiw-step:nth-child(even) {
+  direction: rtl;
+}
+.hiw-step:nth-child(even) > * {
+  direction: ltr;
+}
+.hiw-n {
+  display: inline-block;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--pine);
+  margin-bottom: 0.6rem;
+}
+.hiw-step-text h3 {
+  font-size: 1.3rem;
+}
+.hiw-step-text p {
+  margin: 0;
+  max-width: 46ch;
+}
+@media (max-width: 860px) {
+  .hiw-step,
+  .hiw-step:nth-child(even) {
+    grid-template-columns: 1fr;
+    direction: ltr;
+    gap: 1.5rem;
+  }
+}
+
+/* --- Features bento --- */
+
+.features {
+  padding: 5.5rem 0 6rem;
+  border-top: 1px solid var(--border);
+}
+.bento {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.25rem;
+}
+.bento-card {
+  grid-column: span 2;
+  /* A grid item's automatic minimum width defaults to its content's
+     min-content size, not 0 — so the terminal mock's unbreakable line
+     (`.term-body`, which has its own `overflow-x: auto`) was forcing this
+     whole card, and the page, wider than the viewport on narrow screens
+     instead of scrolling internally like it was meant to. */
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  padding: 1.6rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.bento-card:hover {
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border-strong);
+}
+.bento-card.is-big {
+  grid-column: span 3;
+}
+.bento-card h3 {
+  font-size: 1.08rem;
+  margin-top: 0.25rem;
+}
+.bento-card p {
+  font-size: 0.92rem;
+  margin: 0;
+}
+.bento-visual {
+  margin-bottom: 1.25rem;
+}
+.bento-visual .term {
+  box-shadow: var(--shadow);
+}
+
+.bento-timer {
+  padding: 1.25rem 0.25rem;
+}
+.timer-track {
+  display: flex;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 2.4;
+  white-space: nowrap;
+}
+.timer-seg {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 0.5rem;
+}
+.timer-seg.is-interval {
+  flex: 6;
+  background: var(--success-bg);
+  color: var(--success);
+}
+.timer-seg.is-grace {
+  flex: 2;
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+.timer-seg.is-alert {
+  flex: 1.4;
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+@media (max-width: 1020px) {
+  .bento {
+    grid-template-columns: 1fr 1fr;
+  }
+  .bento-card,
+  .bento-card.is-big {
+    grid-column: span 1;
+  }
+}
+@media (max-width: 640px) {
+  .bento {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Deep dive --- */
+
+.deep-dive {
+  padding: 5.5rem 0;
+  border-top: 1px solid var(--border);
+  background: var(--bg-subtle);
+}
+.deep-dive-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+.deep-dive-grid > * {
+  /* Same fix as `.bento-card` — this column also holds a `.term` terminal
+     mock and would otherwise be able to blow out past the viewport. */
+  min-width: 0;
+}
+.deep-dive-copy .section-head {
+  margin-bottom: 1.5rem;
+}
+.deep-dive-copy p {
+  font-size: 0.98rem;
+}
+.deep-dive-note {
+  font-weight: 600;
+  color: var(--text-h);
+}
+@media (max-width: 900px) {
+  .deep-dive-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* --- Assurance strip --- */
+
+.assurance {
+  padding: 5rem 0;
+}
+.assurance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+.assurance-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+.assurance-card h3 {
+  font-size: 1.05rem;
+}
+.assurance-card p {
+  font-size: 0.92rem;
+  flex: 1;
+}
+@media (max-width: 860px) {
+  .assurance-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- FAQ section --- */
+
+.faq {
+  padding: 5rem 0 6rem;
+  border-top: 1px solid var(--border);
+}
+.faq-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 3rem;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .faq-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* ============================== Pricing ======================================= */
+
+.pricing-tiers {
+  padding: 3.5rem 0 2rem;
+}
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  align-items: stretch;
+}
+.tier-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 900px;
+  margin: 0 auto;
+}
+.tier-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  padding: 1.75rem;
+}
+.tier-card.is-highlight {
+  border-color: var(--pine);
+  box-shadow: 0 0 0 1px var(--pine);
+}
+.tier-flag {
+  position: absolute;
+  top: -0.8rem;
+  left: 1.5rem;
+  background: var(--pine-deep, #273f30);
+  color: #f5f3ee;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding: 0.25rem 0.75rem;
+}
+.tier-card h2 {
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+.tier-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+.tier-amount {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-h);
+}
+.tier-period {
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+.tier-tagline {
+  font-size: 0.9rem;
+  min-height: 3.6em;
+}
+.tier-features {
+  list-style: none;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
+}
+.tier-features li {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  align-items: flex-start;
+}
+.tier-check {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--success);
+  margin-top: 0.2em;
+}
+.tier-cta {
+  width: 100%;
+}
+.tier-cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.tier-cta-buttons .btn-secondary,
+.tier-cta-buttons .btn-primary {
+  width: 100%;
+}
+.pricing-faq {
+  padding: 3rem 0 5rem;
+  max-width: 820px;
+}
+.pricing-faq h2 {
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 760px) {
+  .tier-grid,
+  .tier-grid-2 {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
+/* ============================== Docs =========================================== */
+
+.docs-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 3.5rem;
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+  align-items: start;
+}
+.docs-toc {
+  position: sticky;
+  top: 90px;
+}
+.docs-toc h4 {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-soft);
+}
+.docs-toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.docs-toc a {
+  display: block;
+  padding: 0.4rem 0.6rem;
+  border-radius: 3px;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+.docs-toc a:hover {
+  color: var(--text-h);
+  background: var(--bg-subtle);
+  text-decoration: none;
+}
+.docs-content {
+  min-width: 0;
+  max-width: 720px;
+}
+.docs-section {
+  padding: 1rem 0 2.5rem;
+  scroll-margin-top: 90px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+}
+.docs-section:last-child {
+  border-bottom: none;
+}
+.docs-section h2 {
+  font-size: 1.5rem;
+}
+.docs-steps {
+  margin: 1.5rem 0 0;
+  padding: 0 0 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+.docs-steps h3 {
+  font-size: 1.05rem;
+}
+.docs-table-wrap {
+  overflow-x: auto;
+  margin: 1.25rem 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.docs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.docs-table th {
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-soft);
+  background: var(--bg-subtle);
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.docs-table td {
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.docs-table tr:last-child td {
+  border-bottom: none;
+}
+.docs-table code {
+  white-space: nowrap;
+}
+@media (max-width: 860px) {
+  .docs-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .docs-toc {
+    position: static;
+  }
+  .docs-toc ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+}
+
+/* ============================== Security / About =============================== */
+
+.security-list {
+  padding: 3.5rem 0 4rem;
+}
+.security-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+.security-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  padding: 1.6rem;
+}
+.security-card h3 {
+  font-size: 1.02rem;
+}
+.security-card p {
+  font-size: 0.92rem;
+  margin: 0;
+}
+.security-disclosure {
+  margin-top: 3rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--bg-subtle);
+  padding: 2rem;
+  max-width: 760px;
+}
+.security-disclosure p {
+  margin: 0;
+}
+@media (max-width: 760px) {
+  .security-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.about-body {
+  padding: 3.5rem 0 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+.about-story {
+  max-width: 680px;
+}
+.about-story p {
+  font-size: 1.02rem;
+}
+.about-contact {
+  max-width: 680px;
+}
+.about-contact .btn-secondary {
+  margin-top: 0.5rem;
+}
+
+/* ============================== Changelog ====================================== */
+
+.changelog {
+  padding: 3.5rem 0 5rem;
+}
+.changelog-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 820px;
+}
+.changelog-entry {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 2rem;
+  padding: 2.25rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.changelog-entry:first-child {
+  padding-top: 0;
+}
+.changelog-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+.changelog-meta time {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-h);
+  white-space: nowrap;
+}
+.changelog-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 3px;
+  padding: 0.2rem 0.65rem;
+}
+.changelog-tag.is-new {
+  background: var(--success-bg);
+  color: var(--success);
+}
+.changelog-tag.is-improved {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+.changelog-tag.is-fixed {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+.changelog-body h2 {
+  font-size: 1.2rem;
+}
+.changelog-body ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 0.94rem;
+}
+@media (max-width: 700px) {
+  .changelog-entry {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .changelog-meta {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* ============================== Legal =========================================== */
+
+.legal-body {
+  padding: 3rem 0 5rem;
+  max-width: 680px;
+}
+.legal-body h2 {
+  font-size: 1.2rem;
+  margin-top: 2.25rem;
+}
+.legal-body ul {
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

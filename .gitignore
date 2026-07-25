@@ -1,0 +1,17 @@
+node_modules/
+.wrangler/
+.dev.vars
+worker-configuration.d.ts
+*.log
+.DS_Store
+dist/
+test-results/
+playwright-report/
+blob-report/
+graphify-out/
+
+# Internal planning/status docs — not for the public repo (see README/LICENSE for what is public)
+STATUS.md
+GROWTH_DISTRIBUTION_PLAN.md
+MARKETING_SEO_PLAN.md
+PRO_FEATURES_ROADMAP.md

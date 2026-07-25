@@ -1,0 +1,331 @@
+/* ==========================================================================
+   Vestal design system — tokens, typography, base elements, motion.
+   Page-level styles live in app.css (app chrome) and marketing.css
+   (marketing/content pages).
+
+   The visual language is deliberately flat and print-like: serif display
+   headings over a warm paper background, near-black rectangular buttons,
+   deep pine-green bands, a short gold rule under headings, and the brand
+   red reserved for the flame mark and small accents. No gradients, no
+   glows, no hover-lift theatrics — the register is "enterprise document,"
+   not "startup template."
+   ========================================================================== */
+
+:root {
+  /* -- Warm paper neutrals ------------------------------------------------ */
+  --text: #4a453f;
+  --text-soft: #756e66;
+  --text-h: #161513;
+  --bg: #ffffff;
+  --bg-page: #faf8f5;
+  --bg-subtle: #f3f0eb;
+  --bg-sunken: #edeae4;
+  --bg-inverse: #161513;
+  --text-inverse: #f5f3ee;
+  --border: #e2ded6;
+  --border-strong: #c6c0b6;
+  --code-bg: #f3f0eb;
+
+  /* -- Brand ---------------------------------------------------------------
+     Red is the mark, not the furniture: the flame, links, one hero line.
+     Pine green carries structure (bands, focus, success). Gold is the
+     short rule under display headings and nothing else. */
+  --accent: #c74634;
+  --accent-hover: #a53828;
+  --accent-bg: rgba(199, 70, 52, 0.08);
+  --pine: #33523e;
+  --pine-deep: #273f30;
+  --gold: #d9a13a;
+
+  /* Solid near-black buttons, in the Redwood register. */
+  --btn: #312d2a;
+  --btn-hover: #1d1a17;
+  --btn-text: #ffffff;
+
+  /* Focus rings are pine, not red — red focus reads as an error state. */
+  --focus: #33523e;
+  --focus-bg: rgba(51, 82, 62, 0.14);
+
+  --danger: #b3362a;
+  --danger-hover: #942c22;
+  --danger-bg: rgba(179, 54, 42, 0.08);
+  --success: #33523e;
+  --success-bg: rgba(51, 82, 62, 0.1);
+  --warning: #8f6410;
+  --warning-bg: rgba(217, 161, 58, 0.16);
+
+  --shadow-sm: rgba(22, 21, 19, 0.05) 0 1px 2px;
+  --shadow: rgba(22, 21, 19, 0.07) 0 3px 10px -2px;
+  --shadow-lg: rgba(22, 21, 19, 0.12) 0 12px 28px -10px;
+
+  /* Dark surface used for terminals/mockups in BOTH themes — a product
+     screenshot should look like a screenshot, not flip with the theme. */
+  --panel-dark: #1d1b18;
+  --panel-dark-border: #35322c;
+  --panel-dark-text: #d3cec6;
+  --panel-dark-text-h: #f5f3ee;
+
+  /* Subtle diagonal arc texture: a handful of concentric rings centered at
+     two opposite corners, sweeping across the section. Deliberately NOT a
+     small repeating tile — a tile with rings at only two diagonal corners
+     can't repeat seamlessly (the left edge and right edge profiles are
+     never the same set of radii, so the arcs visibly cut off at every
+     tile boundary), and a tile with rings at all four corners fixes the
+     seam but reads as a dense flower/quatrefoil grid instead of a sparse
+     sweep. Rendered once, large, per section via `background-size: cover`
+     (see usage sites) so there's no repeat boundary to seam at all.
+     Ink variant sits on paper backgrounds; cream variant on green bands. */
+  --arcs-ink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='1000'%3E%3Cg fill='none' stroke='%23161513' stroke-opacity='0.05'%3E%3Ccircle cx='0' cy='1000' r='150'/%3E%3Ccircle cx='0' cy='1000' r='320'/%3E%3Ccircle cx='0' cy='1000' r='490'/%3E%3Ccircle cx='0' cy='1000' r='660'/%3E%3Ccircle cx='0' cy='1000' r='830'/%3E%3Ccircle cx='1000' cy='0' r='150'/%3E%3Ccircle cx='1000' cy='0' r='320'/%3E%3Ccircle cx='1000' cy='0' r='490'/%3E%3Ccircle cx='1000' cy='0' r='660'/%3E%3Ccircle cx='1000' cy='0' r='830'/%3E%3C/g%3E%3C/svg%3E");
+  --arcs-cream: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='1000'%3E%3Cg fill='none' stroke='%23f5f3ee' stroke-opacity='0.08'%3E%3Ccircle cx='0' cy='1000' r='150'/%3E%3Ccircle cx='0' cy='1000' r='320'/%3E%3Ccircle cx='0' cy='1000' r='490'/%3E%3Ccircle cx='0' cy='1000' r='660'/%3E%3Ccircle cx='0' cy='1000' r='830'/%3E%3Ccircle cx='1000' cy='0' r='150'/%3E%3Ccircle cx='1000' cy='0' r='320'/%3E%3Ccircle cx='1000' cy='0' r='490'/%3E%3Ccircle cx='1000' cy='0' r='660'/%3E%3Ccircle cx='1000' cy='0' r='830'/%3E%3C/g%3E%3C/svg%3E");
+
+  /* Serif display over system sans body: zero webfont bytes, and nothing
+     about it reads as the ubiquitous single-sans template look. */
+  --serif: Georgia, "Times New Roman", "Noto Serif", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration: 0.5s;
+  --radius: 4px;
+  --radius-lg: 6px;
+
+  color-scheme: light dark;
+  font: 16px/1.6 var(--sans);
+  color: var(--text);
+  background: var(--bg-page);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #b5aea4;
+    --text-soft: #8c857b;
+    --text-h: #f2efe9;
+    --bg: #211e19;
+    --bg-page: #181512;
+    --bg-subtle: #292520;
+    --bg-sunken: #2e2a24;
+    --bg-inverse: #f2efe9;
+    --text-inverse: #181512;
+    --border: #38332c;
+    --border-strong: #4c463d;
+    --code-bg: #24211c;
+    --accent: #e06a52;
+    --accent-hover: #ea8a76;
+    --accent-bg: rgba(224, 106, 82, 0.12);
+    --pine: #8fb598;
+    --gold: #d9a13a;
+    --btn: #f2efe9;
+    --btn-hover: #d8d3c9;
+    --btn-text: #181512;
+    --focus: #8fb598;
+    --focus-bg: rgba(143, 181, 152, 0.16);
+    --danger: #e07a6d;
+    --danger-hover: #eb9c92;
+    --danger-bg: rgba(224, 122, 109, 0.12);
+    --success: #8fb598;
+    --success-bg: rgba(143, 181, 152, 0.12);
+    --warning: #d9a13a;
+    --warning-bg: rgba(217, 161, 58, 0.14);
+    --shadow-sm: rgba(0, 0, 0, 0.4) 0 1px 2px;
+    --shadow: rgba(0, 0, 0, 0.45) 0 3px 10px -2px;
+    --shadow-lg: rgba(0, 0, 0, 0.55) 0 12px 28px -10px;
+    --arcs-ink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='1000'%3E%3Cg fill='none' stroke='%23f2efe9' stroke-opacity='0.045'%3E%3Ccircle cx='0' cy='1000' r='150'/%3E%3Ccircle cx='0' cy='1000' r='320'/%3E%3Ccircle cx='0' cy='1000' r='490'/%3E%3Ccircle cx='0' cy='1000' r='660'/%3E%3Ccircle cx='0' cy='1000' r='830'/%3E%3Ccircle cx='1000' cy='0' r='150'/%3E%3Ccircle cx='1000' cy='0' r='320'/%3E%3Ccircle cx='1000' cy='0' r='490'/%3E%3Ccircle cx='1000' cy='0' r='660'/%3E%3Ccircle cx='1000' cy='0' r='830'/%3E%3C/g%3E%3C/svg%3E");
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* The sticky header's own height changes when its `.is-scrolled` class
+ * toggles (see app.css) — without this, the browser's scroll-anchoring
+ * feature "corrects" the scroll position to compensate for that shift,
+ * which recrosses the scroll listener's threshold and re-toggles the
+ * class, which shifts height again — a real, confirmed-live resonance
+ * loop (every ~16ms, one per frame) that made anything below the header
+ * unstable for automated clicks. Disabled at the root scroller, not just
+ * on the header, since scroll anchoring compensates for *any* layout
+ * shift above the viewport, not only shifts on an excluded element. */
+html {
+  overflow-anchor: none;
+}
+
+body {
+  margin: 0;
+}
+
+#app {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Display headings are serif; small UI headings (h3/h4 — card titles,
+   form sections) stay bold sans so dense screens read crisply. */
+h1,
+h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--text-h);
+  margin: 0 0 0.5em;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+h3,
+h4 {
+  font-family: var(--sans);
+  font-weight: 650;
+  color: var(--text-h);
+  margin: 0 0 0.5em;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: 2.1rem;
+}
+h2 {
+  font-size: 1.5rem;
+}
+h3 {
+  font-size: 1.1rem;
+}
+h4 {
+  font-size: 0.95rem;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.875em;
+  background: var(--code-bg);
+  border-radius: 3px;
+  padding: 0.15em 0.4em;
+}
+
+::selection {
+  background: var(--pine-deep);
+  color: #f5f3ee;
+}
+
+/* -- Shared utilities ------------------------------------------------------ */
+
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Legacy class name from the ember-gradient design; now the one plain
+   accent moment a display heading is allowed. */
+.gradient-text {
+  color: var(--accent);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--pine);
+  margin: 0 0 0.7em;
+}
+
+/* The short gold rule that sits under display headings — the design's
+   one decorative signature. Applied per-heading in app.css/marketing.css
+   via the .rule-after hook below. */
+.rule-after::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 3px;
+  margin-top: 0.45em;
+  background: var(--gold);
+}
+.rule-center::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Numbers that line up in stat blocks / durations. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* -- Motion primitives -----------------------------------------------------
+   Progressive enhancement only: with JS disabled or prefers-reduced-motion,
+   .reveal elements are simply visible. Nothing depends on animation. */
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-stagger > * {
+    transition-delay: calc(var(--stagger-i, 0) * 70ms);
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 0 0 var(--pulse-color, var(--success-bg)); }
+    60% { box-shadow: 0 0 0 6px transparent; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Deliberately NOT a global `html { scroll-behavior: smooth }` — that makes
+   every programmatic scroll animate, including Playwright's actionability
+   scroll before each click, which took the E2E suite from 6/6 to 2/6 with
+   "element is not stable" timeouts when it was tried. Smooth scrolling is
+   scoped to the individual anchor clicks that want it (scrollIntoView with
+   behavior:'smooth' in the click handler). */
+
+/* View Transitions for route navigation (see router.tsx). No-ops harmlessly
+   in browsers without support. */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: vt-out 0.18s var(--ease) both;
+  }
+  ::view-transition-new(root) {
+    animation: vt-in 0.2s var(--ease) both;
+  }
+  @keyframes vt-out {
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes vt-in {
+    from {
+      opacity: 0;
+    }
+  }
+}

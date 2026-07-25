@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Vestal admin</title>
+    <link rel="stylesheet" href="/admin.css" />
+  </head>
+  <body>
+    <div id="admin-app">
+      <header>
+        <h1>Vestal admin</h1>
+        <span id="admin-status"></span>
+      </header>
+
+      <section id="key-panel">
+        <label for="admin-key">Admin API key</label>
+        <input id="admin-key" type="password" autocomplete="off" placeholder="paste the ADMIN_API_KEY" />
+        <button id="connect-btn" type="button">Connect</button>
+        <p class="hint">
+          Kept only in this tab's session storage — cleared when the tab closes, never sent
+          anywhere except as an Authorization header to this same origin.
+        </p>
+      </section>
+
+      <section id="stats-panel" hidden>
+        <div class="stat"><span id="stat-users">—</span><label>users</label></div>
+        <div class="stat"><span id="stat-checks">—</span><label>checks</label></div>
+        <div class="stat"><span id="stat-channels">—</span><label>alert channels</label></div>
+        <div class="stat"><span id="stat-active">—</span><label>active (24h)</label></div>
+        <div class="stat"><span id="stat-unverified">—</span><label>unverified email</label></div>
+      </section>
+
+      <section id="users-panel" hidden>
+        <table>
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Created</th>
+              <th>Verified</th>
+              <th>2FA</th>
+              <th>Checks</th>
+              <th>Channels</th>
+              <th>Last ping</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="users-body"></tbody>
+        </table>
+      </section>
+    </div>
+    <script src="/admin.js"></script>
+  </body>
+</html>

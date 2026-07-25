@@ -1,0 +1,78 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "vestal",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "vestal",
+      "database_id": "f870951d-e61e-4f2d-91eb-674f85b5b1c7",
+      "migrations_dir": "./migrations"
+    }
+  ],
+
+  // Serializes verification-ledger appends per user — see
+  // src/ledger-coordinator.ts and PRO_FEATURES_ROADMAP.md item 4. One DO
+  // instance per user (routed via idFromName(userId) in src/index.ts)
+  // closes the two-D1-calls race that used to let a user's chain fork.
+  "durable_objects": {
+    "bindings": [{ "name": "LEDGER_COORDINATOR", "class_name": "LedgerCoordinator" }]
+  },
+
+  // Durable Object class migrations — a DIFFERENT mechanism from the D1
+  // `migrations/*.sql` files (those run via `wrangler d1 migrations
+  // apply`; these run automatically on deploy/dev startup). new_sqlite_classes
+  // (not the older new_classes) since that's the storage backend available
+  // on the Workers plan this runs on; LedgerCoordinator itself doesn't use
+  // ctx.storage at all (it only coordinates D1 calls), but every DO class
+  // still needs a storage backend declared.
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["LedgerCoordinator"] }],
+
+  // The dashboard SPA (web/), built via `npm run build:web`. /api/*,
+  // /ping/*, and /health always go to the Worker (fetch handler above)
+  // even though none of them match a static file anyway — without this,
+  // unmatched paths fall through to the SPA's index.html instead, per
+  // not_found_handling below. Caught for real, not just in theory: /health
+  // was added to index.ts without adding it here first, and it silently
+  // served the SPA's HTML instead of the JSON health check until this was
+  // fixed — an external uptime monitor pointed at it would have seen "200
+  // OK" forever regardless of whether the database was actually reachable.
+  "assets": {
+    "directory": "./web/dist",
+    "not_found_handling": "single-page-application",
+    // /__scheduled is wrangler's own local cron-simulation endpoint
+    // (only registered when `wrangler dev --test-scheduled` is used, a
+    // no-op path in real production) — it had the identical problem to
+    // /health above and was silently serving the SPA instead of actually
+    // triggering the cron handler locally.
+    "run_worker_first": ["/api/*", "/ping/*", "/health", "/__scheduled"]
+  },
+
+  // Every 5 minutes: scan for checks that are overdue past their grace period.
+  "triggers": {
+    "crons": ["*/5 * * * *"]
+  },
+
+  // Real domain, verified with Resend for outgoing mail (see src/email.ts).
+  // workers_dev must be set explicitly here — wrangler silently disables
+  // the free workers.dev URL the moment any `routes` entry exists, unless
+  // told not to. Caught before it shipped: the free URL is still the
+  // fallback if the custom domain ever has DNS trouble, so keeping it
+  // alive is deliberate, not an oversight.
+  "workers_dev": true,
+  "routes": [{ "pattern": "vestalapp.com", "custom_domain": true }],
+
+  "env": {
+    "staging": {
+      "name": "vestal-staging"
+    }
+  }
+}
